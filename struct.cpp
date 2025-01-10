@@ -405,8 +405,8 @@ void Modify(Students stu[])
             break;
         case 'n':
             cout << " Enter the Modifiying Name \n";
-            cin.getline(stu[user_num].name, 100);
             cin.ignore();
+            cin.getline(stu[user_num].name, 100);
             cout << " Modified the Name Successfully \n";
             cout << " To check go to main menu and select Display Function \n";
 
