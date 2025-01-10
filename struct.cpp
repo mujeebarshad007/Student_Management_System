@@ -104,6 +104,7 @@ void Search_by_id(Students stu[], int n, int target1)
         {
             found = true;
             loc = i;
+            break;
         }
     }
     if (found == true)
@@ -240,7 +241,7 @@ void Search(Students stu[])
     int ids;
     int roll_numbers;
     char names[100];
-    char Fnames[100];
+    int semesters;
     float gpas;
 
     cout << " Enter the term You want to search\n";
@@ -291,12 +292,15 @@ void Search(Students stu[])
 void Sort(Students stu[])
 {
     system("clear");
-
-    cout << " You Want to Sort by Id or Name \n ";
+    cout << "\t\t\t\t\t\t\t  ___________________________________________________" << endl;
+    cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+    cout << "\t\t\t\t\t\t\t |         Press I to Sort this user Data by ID      |" << endl;
+    cout << "\t\t\t\t\t\t\t |       Press N to Sort this user Data by NAME      |" << endl;
+    cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+    cout << "\t\t\t\t\t\t\t |___________________________________________________|" << endl;
+    cout << "\t\t\t\t\t\t\t                Enter the Character: ";
     cout << endl;
     cout << endl;
-    cout << "===========================================" << endl;
-    cout << " Press I for Id and N for name \n";
     char sinp = getch();
     sinp = tolower(sinp);
     switch (sinp)
@@ -324,6 +328,8 @@ void SortId(Students stu[])
             }
         }
     }
+    cout << endl;
+    cout << endl;
     cout << " The Sorted Data is Given as :\n";
     Display(stu);
 }
@@ -343,6 +349,8 @@ void Sortname(Students stu[])
             }
         }
     }
+    cout << endl;
+    cout << endl;
     cout << " The Sorted Data is Given as :\n";
     Display(stu);
 }
@@ -464,6 +472,7 @@ void Delete(Students stu[])
 {
 
     DisplayF(stu);
+
     if (n > 0)
     {
         system("clear");
@@ -477,31 +486,33 @@ void Delete(Students stu[])
         cout << "\t\t\t\t\t\t\t                Enter the ID Number: ";
 
         cin >> del_id;
-        if (del_id < 1 || del_id > n)
-        {
-            cout << " Invalid user number! Press Enter to return to the main menu...";
-            cin.ignore();
-            cin.get();
-            return;
-        }
-        for (int i = del_id - 1; i < n - 1; i++)
-        {
-            stu[i] = stu[i + 1];
-        }
-        n--;
-        cout << endl;
-        cout << endl;
 
-        cout << "\t\t\t\t\t\t                The Record  has been Deleted Successfully. \n";
-        cout << "\t\t\t\t\t\t          Press Enter to go to main menu and use Display to Check ";
+        bool found = false;
+        for (int i = 0; i < n; ++i)
+        {
+            if (stu[i].id == del_id)
+            {
+                // Shift the remaining elements
+                for (int j = i; j < n - 1; ++j)
+                {
+                    stu[j] = stu[j + 1];
+                }
+                --n; // Decrease the number of records
+                found = true;
+                cout << "\t\t\t\t\t\t                The Record  has been Deleted Successfully. \n";
+                cout << "\t\t\t\t\t\t          Press Enter to go to main menu and use Display to Check\n ";
+                break;
+            }
+        }
+        if (!found)
+        {
+            cout << "No record found with ID " << del_id << "!\n";
+        }
+
         cout << endl;
 
         cin.ignore();
         cin.get();
-    }
-    else
-    {
-        cout << " There is no Record to Delete \n";
     }
 }
 int main()
@@ -531,15 +542,15 @@ int main()
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
             cout << "\t\t\t\t\t\t\t |             Press ( A ) to Add the record         |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-            cout << "\t\t\t\t\t\t\t |             Press ( O ) to Sort the record        |" << endl;
+            cout << "\t\t\t\t\t\t\t |             Press ( D ) to Display  the record    |" << endl;
+            cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+            cout << "\t\t\t\t\t\t\t |             Press ( O ) to Sort the record       |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
             cout << "\t\t\t\t\t\t\t |             Press ( S ) to Search the record      |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-            cout << "\t\t\t\t\t\t\t |             Press ( D ) to Display  the record    |" << endl;
+            cout << "\t\t\t\t\t\t\t |             Press ( M ) to Modify  the record     |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
             cout << "\t\t\t\t\t\t\t |             Press ( T )  to Delete  the record    |" << endl;
-            cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-            cout << "\t\t\t\t\t\t\t |             Press ( M ) to Modify  the record     |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
             cout << "\t\t\t\t\t\t\t |             Press ( Q ) to Exit  the record       |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
@@ -556,20 +567,20 @@ int main()
                 case 'a':
                     Add();
                     break;
-                case 'o':
-                    Sort(stu);
+                case 'd':
+                    Display(stu);
                     break;
                 case 's':
                     Search(stu);
                     break;
-                case 'd':
-                    Display(stu);
-                    break;
-                case 't':
-                    Delete(stu);
+                case 'o':
+                    Sort(stu);
                     break;
                 case 'm':
                     Modify(stu);
+                    break;
+                case 't':
+                    Delete(stu);
                     break;
                 case 'q':
                     exit(0);
