@@ -544,7 +544,7 @@ int main()
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
             cout << "\t\t\t\t\t\t\t |             Press ( D ) to Display  the record    |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-            cout << "\t\t\t\t\t\t\t |             Press ( O ) to Sort the record       |" << endl;
+            cout << "\t\t\t\t\t\t\t |             Press ( O ) to Sort the record        |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
             cout << "\t\t\t\t\t\t\t |             Press ( S ) to Search the record      |" << endl;
             cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
