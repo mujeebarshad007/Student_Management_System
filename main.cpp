@@ -27,8 +27,8 @@ void Search_by_name(student stu[]);
 void Search_by_roll_number(student stu[]);
 void Modify(student stu[]);
 void Delete(student stu[]);
-void Add(student stu[])
 
+void Add(student stu[])
 {
     char ch;
     do
@@ -343,9 +343,10 @@ void Modify(student stu[])
 {
     if (n > 0)
     {
-        system("clear");
-
         bool found = false;
+        system("clear");
+        int loc;
+
         int m_id;
         cout << " Enter the user ID to Modify his Record \n";
         cin >> m_id;
@@ -354,11 +355,17 @@ void Modify(student stu[])
         {
             if (m_id == stu[i].id)
             {
+
                 found = true;
+                loc = i;
                 system("clear");
 
                 cout << " The Record is given as " << endl;
-                Displayf(stu);
+                cout << setw(10) << " ID:" << setw(20) << "Roll Number:" << setw(20) << "Name:" << setw(20) << "GPA:" << setw(20) << "Semester:" << endl;
+                cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << endl;
+                cout << setw(10) << stu[loc].id << setw(20) << stu[loc].roll_number << setw(20) << stu[loc].name << setw(20) << stu[loc].gpa << setw(20) << stu[loc].semester << endl;
+                cout << "================================================================================================" << endl;
+                cout << endl;
                 cout << endl;
                 cout << endl;
                 cout << " Press I to Modify ID and Press Enter" << endl;
@@ -377,14 +384,12 @@ void Modify(student stu[])
                     cout << " Enter the New Modifiying Id " << endl;
                     cin >> stu[i].id;
                     cout << " ID has been Modified Successfully. \n";
-
                     break;
                 case 'r':
                     cout << endl;
                     cout << " Enter the new Modifying Roll number of the student " << endl;
                     cin >> stu[i].roll_number;
                     cout << " Roll Number has been Modified Successfully. \n";
-
                     break;
                 case 'n':
                     cout << endl;
@@ -392,14 +397,12 @@ void Modify(student stu[])
                     cin.ignore();
                     cin.getline(stu[i].name, 100);
                     cout << " Name has been Modified Successfully. \n";
-
                     break;
                 case 'g':
                     cout << endl;
                     cout << " Enter the New Modifiying Gpa " << endl;
                     cin >> stu[i].gpa;
                     cout << " GPA has been Modified Successfully. \n";
-
                     break;
 
                 case 's':
@@ -434,17 +437,20 @@ void Modify(student stu[])
                 default:
                     cout << "Invalid Option . No Record is changed \n";
                 }
+                break;
             }
         }
-        if (found)
+        if (!found)
         {
-            cout << " No Record for this ID has been Found " << endl;
+            cout << " Three is No record Present for this ID " << endl;
+            cout << " Press Enter to Go to Main Menus " << endl;
         }
     }
     else
     {
         cout << " Please Go to Main Menu and add records " << endl;
     }
+    getch();
 }
 void Delete(student stu[])
 {
