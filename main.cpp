@@ -7,7 +7,6 @@
 #include <cctype>
 #include "conio.h"
 #include <stdio.h>
-#include <fstream>
 #include <cstdlib>
 using namespace std;
 struct student
@@ -15,6 +14,8 @@ struct student
     int id;
     char name[100];
     float gpa;
+    int semester;
+    int roll_number;
 };
 student stu[10];
 int n = 0;
@@ -38,11 +39,15 @@ void Add(student stu[])
         cout
             << " Enter the id of the student " << n + 1 << endl;
         cin >> stu[n].id;
-        cin.ignore();
+        cout << " Enter the Roll number of the student " << n + 1 << endl;
+        cin >> stu[n].roll_number;
         cout << " Enter the Name of the student " << n + 1 << endl;
+        cin.ignore();
         cin.getline(stu[n].name, 100);
         cout << " Enter the GPA of the student " << n + 1 << endl;
         cin >> stu[n].gpa;
+        cout << " Enter the Semester of the student " << n + 1 << endl;
+        cin >> stu[n].semester;
         n++;
         cout << " Do you want more students to add [y/n]\n";
         cin >> ch;
@@ -55,11 +60,11 @@ void Display(student stu[])
     if (n > 0)
     {
 
-        cout << setw(10) << " ID:" << setw(20) << "Name:" << setw(20) << "GPA:" << endl;
-        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << endl;
+        cout << setw(10) << " ID:" << setw(20) << "Roll Number:" << setw(20) << "Name:" << setw(20) << "GPA:" << setw(20) << "Semester:" << endl;
+        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << endl;
         for (int i = 0; i < n; i++)
         {
-            cout << setw(10) << stu[i].id << setw(20) << stu[i].name << setw(20) << stu[i].gpa << endl;
+            cout << setw(10) << stu[i].id << setw(20) << stu[i].roll_number << setw(20) << stu[i].name << setw(20) << stu[i].gpa << setw(20) << stu[i].semester << endl;
         }
 
         cout << " ============================================================" << endl;
@@ -74,11 +79,11 @@ void Display(student stu[])
 void Displayf(student stu[])
 {
 
-    cout << setw(10) << " ID:" << setw(20) << "Name:" << setw(20) << "GPA:" << endl;
-    cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << endl;
+    cout << setw(10) << " ID:" << setw(20) << "Roll Number:" << setw(20) << "Name:" << setw(20) << "GPA:" << setw(20) << "Semester:" << endl;
+    cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << endl;
     for (int i = 0; i < n; i++)
     {
-        cout << setw(10) << stu[i].id << setw(20) << stu[i].name << setw(20) << stu[i].gpa << endl;
+        cout << setw(10) << stu[i].id << setw(20) << stu[i].roll_number << setw(20) << stu[i].name << setw(20) << stu[i].gpa << setw(20) << stu[i].semester << endl;
     }
 }
 
@@ -292,8 +297,10 @@ void Modify(student stu[])
                 found = true;
                 system("clear");
                 cout << " Press I to Modify ID and Press Enter" << endl;
+                cout << " Press R to Modify Roll Number and Press Enter " << endl;
                 cout << " Press N to Modify Name and Press Enter " << endl;
                 cout << " Press G to Modify Gpa and Press Enter" << endl;
+                cout << " Press S to Modify Semester and Press Enter" << endl;
                 cout << " Press W to Modify WHole Student Record and Press Enter" << endl;
                 char ch;
                 cin >> ch;
@@ -316,6 +323,17 @@ void Modify(student stu[])
                     cout << " Enter the New Modifiying Gpa " << endl;
                     cin >> stu[i].gpa;
                     break;
+                case 'r':
+                    cout << endl;
+                    cout << " Enter the new Modifying Roll number of the student " << endl;
+                    cin >> stu[i].roll_number;
+                    break;
+                case 's':
+                    cout << endl;
+                    cout << " Enter the new Modifying Semester of the student " << endl;
+                    cin >> stu[i].semester;
+                    break;
+
                 case 'w':
                     cout << endl;
                     cout << endl;
@@ -389,6 +407,7 @@ void Delete(student stu[])
     else
     {
         cout << " Please Go to Main Menu and add records " << endl;
+        getch();
     }
 }
 
