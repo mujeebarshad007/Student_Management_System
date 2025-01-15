@@ -196,7 +196,7 @@ void Search(student stu[])
             Search_by_roll_number(stu);
             break;
         default:
-            cout << " Enter the correcct key for Searching " << endl;
+            cout << " Enter the correct key for Searching " << endl;
             cout << " Press Enter to go to main menu \n";
         }
     }
