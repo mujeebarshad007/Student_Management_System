@@ -1,13 +1,9 @@
 #include <iostream>
 #include <cstring>
-#include <cmath>
 #include <iomanip>
-#include <ctime>
 #include <climits>
 #include <cctype>
 #include "conio.h"
-#include <stdio.h>
-#include <cstdlib>
 using namespace std;
 struct student
 {
@@ -21,12 +17,14 @@ student stu[10];
 int n = 0;
 void Add(student stu[]);
 void Display(student stu[]);
+void Displayf(student stu[]);
 void Sort(student stu[]);
 void Sort_by_id(student stu[]);
 void Sort_by_name(student stu[]);
 void Search(student stu[]);
 void Search_by_id(student stu[]);
 void Search_by_name(student stu[]);
+void Search_by_roll_number(student stu[]);
 void Modify(student stu[]);
 void Delete(student stu[]);
 void Add(student stu[])
@@ -57,6 +55,7 @@ void Add(student stu[])
 }
 void Display(student stu[])
 {
+    system("clear");
     if (n > 0)
     {
 
@@ -169,6 +168,7 @@ void Sort_by_name(student stu[])
     Display(stu);
     cout << endl;
 }
+
 void Search(student stu[])
 {
     if (n > 0)
@@ -179,7 +179,7 @@ void Search(student stu[])
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
         cout << "\t\t\t\t\t\t\t |             Press I to Search by ID               |" << endl;
         cout << "\t\t\t\t\t\t\t |             Press N to Search by Name             |" << endl;
-        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+        cout << "\t\t\t\t\t\t\t |          Press R to Search by Roll Number         |" << endl;
         cout << "\t\t\t\t\t\t\t |___________________________________________________|" << endl;
 
         char seinp = getch();
@@ -192,8 +192,12 @@ void Search(student stu[])
         case 'n':
             Search_by_name(stu);
             break;
+        case 'r':
+            Search_by_roll_number(stu);
+            break;
         default:
             cout << " Enter the correcct key for Searching " << endl;
+            cout << " Press Enter to go to main menu \n";
         }
     }
     else
@@ -219,20 +223,68 @@ void Search_by_id(student stu[])
     }
     if (found == true)
     {
-        cout << "=====================================================================" << endl;
+        system("clear");
         cout << endl;
         cout << " Yes The Record with the id " << id_num << "  has been Found" << endl;
-        cout << setw(10) << " ID:" << setw(20) << "Name:" << setw(20) << "GPA:" << endl;
-        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << endl;
-        cout << setw(10) << stu[loc].id << setw(20) << stu[loc].name << setw(20) << stu[loc].gpa << endl;
-        cout << "=====================================================================" << endl;
+        cout << endl;
+        cout << setw(10) << " ID:" << setw(20) << "Roll Number:" << setw(20) << "Name:" << setw(20) << "GPA:" << setw(20) << "Semester:" << endl;
+        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << endl;
+        cout << setw(10) << stu[loc].id << setw(20) << stu[loc].roll_number << setw(20) << stu[loc].name << setw(20) << stu[loc].gpa << setw(20) << stu[loc].semester << endl;
+        cout << "===============================================================================================" << endl;
         cout << endl;
         cout << " Press Enter to go to main menu \n";
+        getch();
     }
     else
     {
+        system("clear");
+
         cout << "=====================================================================" << endl;
-        cout << " Sorry The Record with the id " << id_num << "  has not been Found" << endl;
+        cout << " Sorry The Record with the ID " << id_num << "  has not been Found" << endl;
+        cout << " Press Enter to go to main menu \n";
+        getch();
+    }
+}
+void Search_by_roll_number(student stu[])
+{
+    int sroll;
+    int loc;
+    system("clear");
+    cout << " Enter the roll number you want to search " << endl;
+    cin >> sroll;
+    bool found = false;
+    for (int i = 0; i < n; i++)
+    {
+        if (stu[i].roll_number == sroll)
+        {
+            found = true;
+            loc = i;
+            break;
+        }
+    }
+    if (found == true)
+    {
+        system("clear");
+
+        cout << endl;
+        cout << " Yes The Record with the Roll Number  " << sroll << "  has been Found" << endl;
+        cout << endl;
+        cout << setw(10) << " ID:" << setw(20) << "Roll Number:" << setw(20) << "Name:" << setw(20) << "GPA:" << setw(20) << "Semester:" << endl;
+        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << endl;
+        cout << setw(10) << stu[loc].id << setw(20) << stu[loc].roll_number << setw(20) << stu[loc].name << setw(20) << stu[loc].gpa << setw(20) << stu[loc].semester << endl;
+        cout << "===============================================================================================" << endl;
+        cout << endl;
+        cout << " Press Enter to go to main menu \n";
+        getch();
+    }
+    else
+    {
+        system("clear");
+
+        cout << "=====================================================================" << endl;
+        cout << " Sorry The Record with the Roll Number " << sroll << "  has not been Found" << endl;
+        cout << " Press Enter to go to main menu \n";
+        getch();
     }
 }
 void Search_by_name(student stu[])
@@ -250,7 +302,7 @@ void Search_by_name(student stu[])
         strcpy(s1name, stu[i].name);
         for (int k = 0; s1name[k] != '\0'; k++)
         {
-            s1name[k] = tolower(s1name[k]);
+            s1name[k] = tolower(s1name[k]); /* Making this To make sure whether entered name is lower and upper*/
         }
         for (int k = 0; sname[k] != '\0'; k++)
         {
@@ -265,26 +317,34 @@ void Search_by_name(student stu[])
     }
     if (found == true)
     {
-        cout << "=====================================================================" << endl;
-        cout << " Yes The Record with the id " << sname << "  has been Found" << endl;
+        system("clear");
+
+        cout << "=============================================================================================" << endl;
+        cout << " Yes The Record with the Name " << sname << "  has been Found" << endl;
         cout << endl;
-        cout << setw(10) << " ID:" << setw(20) << "Name:" << setw(20) << "GPA:" << endl;
-        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << endl;
-        cout << setw(10) << stu[loc].id << setw(20) << stu[loc].name << setw(20) << stu[loc].gpa << endl;
-        cout << "=====================================================================" << endl;
+        cout << setw(10) << " ID:" << setw(20) << "Roll Number:" << setw(20) << "Name:" << setw(20) << "GPA:" << setw(20) << "Semester:" << endl;
+        cout << setw(10) << "-------" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << setw(20) << "----" << endl;
+        cout << setw(10) << stu[loc].id << setw(20) << stu[loc].roll_number << setw(20) << stu[loc].name << setw(20) << stu[loc].gpa << setw(20) << stu[loc].semester << endl;
+        cout << "================================================================================================" << endl;
         cout << endl;
         cout << " Press Enter to go to main menu \n";
     }
     else
     {
+        system("clear");
+
         cout << "=====================================================================" << endl;
         cout << " Sorry The Record with the id " << sname << "  has not been Found" << endl;
+        cout << " Press Enter to go to main menu \n";
+        getch();
     }
 }
 void Modify(student stu[])
 {
     if (n > 0)
     {
+        system("clear");
+
         bool found = false;
         int m_id;
         cout << " Enter the user ID to Modify his Record \n";
@@ -296,6 +356,11 @@ void Modify(student stu[])
             {
                 found = true;
                 system("clear");
+
+                cout << " The Record is given as " << endl;
+                Displayf(stu);
+                cout << endl;
+                cout << endl;
                 cout << " Press I to Modify ID and Press Enter" << endl;
                 cout << " Press R to Modify Roll Number and Press Enter " << endl;
                 cout << " Press N to Modify Name and Press Enter " << endl;
@@ -311,27 +376,38 @@ void Modify(student stu[])
                     cout << endl;
                     cout << " Enter the New Modifiying Id " << endl;
                     cin >> stu[i].id;
+                    cout << " ID has been Modified Successfully. \n";
+
+                    break;
+                case 'r':
+                    cout << endl;
+                    cout << " Enter the new Modifying Roll number of the student " << endl;
+                    cin >> stu[i].roll_number;
+                    cout << " Roll Number has been Modified Successfully. \n";
+
                     break;
                 case 'n':
                     cout << endl;
                     cout << " Enter the New Modifiying Name " << endl;
                     cin.ignore();
                     cin.getline(stu[i].name, 100);
+                    cout << " Name has been Modified Successfully. \n";
+
                     break;
                 case 'g':
                     cout << endl;
                     cout << " Enter the New Modifiying Gpa " << endl;
                     cin >> stu[i].gpa;
+                    cout << " GPA has been Modified Successfully. \n";
+
                     break;
-                case 'r':
-                    cout << endl;
-                    cout << " Enter the new Modifying Roll number of the student " << endl;
-                    cin >> stu[i].roll_number;
-                    break;
+
                 case 's':
                     cout << endl;
                     cout << " Enter the new Modifying Semester of the student " << endl;
                     cin >> stu[i].semester;
+                    cout << " Semester has been Modified Successfully. \n";
+
                     break;
 
                 case 'w':
@@ -339,16 +415,25 @@ void Modify(student stu[])
                     cout << endl;
                     cout << " Enter the New Modifiying Id " << endl;
                     cin >> stu[i].id;
+                    cout << endl;
+                    cout << " Enter the new Modifying Roll number of the student " << endl;
+                    cin >> stu[i].roll_number;
+                    cout << endl;
                     cout << " Enter the New Modifiying Name " << endl;
                     cin.ignore();
                     cin.getline(stu[i].name, 100);
+                    cout << endl;
                     cout << " Enter the New Modifiying Gpa " << endl;
                     cin >> stu[i].gpa;
+                    cout << endl;
+                    cout << " Enter the new Modifying Semester of the student " << endl;
+                    cin >> stu[i].semester;
+                    cout << endl;
+                    cout << " Record has been Modified Successfully. \n";
                     break;
                 default:
                     cout << "Invalid Option . No Record is changed \n";
                 }
-                cout << " Record has been Modified Successfully. \n";
             }
         }
         if (found)
@@ -367,8 +452,10 @@ void Delete(student stu[])
     if (n > 0)
     {
         system("clear");
+        cout << " The Record is given as " << endl;
+        cout << endl;
         Displayf(stu);
-
+        cout << endl;
         int del_id;
         cout << "\t\t\t\t\t\t\t  ___________________________________________________" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
@@ -415,55 +502,83 @@ int main()
 {
     while (1)
     {
+        system("clear");
         cout << "\t\t\t\t\t\t\t  ___________________________________________________" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( A ) to Add the record         |" << endl;
+        cout << "\t\t\t\t\t\t\t |             Welcome  Guys How are You!            |" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( D ) to Display  the record    |" << endl;
+        cout << "\t\t\t\t\t\t\t |           Welcome TO Student Management System    |" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( O ) to Sort the record        |" << endl;
-        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( S ) to Search the record      |" << endl;
-        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( M ) to Modify  the record     |" << endl;
-        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( T )  to Delete  the record    |" << endl;
-        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
-        cout << "\t\t\t\t\t\t\t |             Press ( Q ) to Exit  the record       |" << endl;
+        cout << "\t\t\t\t\t\t\t |             Please Press  /S/ to Start            |" << endl;
         cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
         cout << "\t\t\t\t\t\t\t |___________________________________________________|" << endl;
-        char st = getch();
-        st = tolower(st);
-        switch (st)
+        char start = getch();
+        start = tolower(start);
+        if (start == 's')
         {
-        case 'a':
-            Add(stu);
-            break;
-        case 'd':
-            Display(stu);
-            break;
-        case 'o':
-            Sort(stu);
-            break;
-        case 's':
-            Search(stu);
-            break;
-        case 'm':
-            Modify(stu);
-            break;
-        case 't':
-            Delete(stu);
-            break;
-        case 'q':
-            exit(0);
-            break;
-        default:
-            cout << "Select Only from the menu" << endl;
-            cout << "Press Enter \n";
+            while (1)
+            {
+                system("clear");
+                cout << "\t\t\t\t\t\t\t  ___________________________________________________" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( A ) to Add the record         |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( D ) to Display  the record    |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( O ) to Sort the record        |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( S ) to Search the record      |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( M ) to Modify  the record     |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( T )  to Delete  the record    |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |             Press ( Q ) to Exit  the record       |" << endl;
+                cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+                cout << "\t\t\t\t\t\t\t |___________________________________________________|" << endl;
+                char st = getch();
+                st = tolower(st);
+                switch (st)
+                {
+                case 'a':
+                    Add(stu);
+                    break;
+                case 'd':
+                    Display(stu);
+                    break;
+                case 'o':
+                    Sort(stu);
+                    break;
+                case 's':
+                    Search(stu);
+                    break;
+                case 'm':
+                    Modify(stu);
+                    break;
+                case 't':
+                    Delete(stu);
+                    break;
+                case 'q':
+                    exit(0);
+                    break;
+                default:
+                    cout << "Select Only from the menu" << endl;
+                    cout << "Press Enter \n";
+                }
+                getch();
+            }
+        }
+        else
+        {
+            cout << " Oops You Didn't Press /S/" << endl;
+            cout << " Press Enter to Start Again " << endl;
         }
         getch();
     }
+
     return 0;
 }
