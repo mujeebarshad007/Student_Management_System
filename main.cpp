@@ -92,7 +92,13 @@ void Sort(student stu[])
     {
 
         system("clear");
-        cout << " Press I for sort by ID and N for Sort by Name " << endl;
+        cout << "\t\t\t\t\t\t\t  ___________________________________________________" << endl;
+        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+        cout << "\t\t\t\t\t\t\t |             Press I to Sort by ID                 |" << endl;
+        cout << "\t\t\t\t\t\t\t |             Press N to Srt by Name                |" << endl;
+        cout << "\t\t\t\t\t\t\t |                                                   |" << endl;
+        cout << "\t\t\t\t\t\t\t |___________________________________________________|" << endl;
+
         char sinp = getch();
         sinp = tolower(sinp);
         switch (sinp)
@@ -147,14 +153,12 @@ void Sort_by_name(student stu[])
             char name2[100];
             strcpy(name1, stu[j].name);
             strcpy(name2, stu[j + 1].name);
-            for (int k = 0; name1[k] != '\0'; k++)
+            for (int k = 0; name1[k] != '\0' || name2[k] != '\0'; k++)
             {
                 name1[k] = tolower(name1[k]);
-            }
-            for (int k = 0; name2[k] != '\0'; k++)
-            {
                 name2[k] = tolower(name2[k]);
             }
+
             if (strcmp(name1, name2) > 0)
             {
                 student temp = stu[j];
@@ -300,12 +304,9 @@ void Search_by_name(student stu[])
     for (int i = 0; i < n; i++)
     {
         strcpy(s1name, stu[i].name);
-        for (int k = 0; s1name[k] != '\0'; k++)
+        for (int k = 0; s1name[k] != '\0' || sname[k] != '\0'; k++)
         {
-            s1name[k] = tolower(s1name[k]); /* Making this To make sure whether entered name is lower and upper*/
-        }
-        for (int k = 0; sname[k] != '\0'; k++)
-        {
+            s1name[k] = tolower(s1name[k]);
             sname[k] = tolower(sname[k]);
         }
         if (strcmp(s1name, sname) == 0)
