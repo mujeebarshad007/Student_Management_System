@@ -186,7 +186,7 @@ void Sort_by_name(student stu[])
         {
             char name1[100];
             char name2[100];
-            strcpy(name1, stu[j].name);
+            strcpy(name1, stu[j].name); /*Copying the both names to another character array using string copy function*/
             strcpy(name2, stu[j + 1].name);
             for (int k = 0; name1[k] != '\0' || name2[k] != '\0'; k++)
             {
@@ -589,21 +589,27 @@ int main()
                 case 'a':
                     Add(stu);
                     break;
+
                 case 'd':
                     Display(stu);
                     break;
+
                 case 'o':
                     Sort(stu);
                     break;
+
                 case 's':
                     Search(stu);
                     break;
+
                 case 'm':
                     Modify(stu);
                     break;
+
                 case 't':
                     Delete(stu);
                     break;
+
                 case 'q':
                     cout << "Thank ";
                     cout.flush();   /*Using it so that no buffer is displayed immediatelt the next word is displayed*/
