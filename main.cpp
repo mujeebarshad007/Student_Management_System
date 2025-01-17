@@ -28,6 +28,7 @@ void Search_by_name(student stu[]);
 void Search_by_roll_number(student stu[]);
 void Modify(student stu[]);
 void Delete(student stu[]);
+void thankyou(void);
 
 void Add(student stu[])
 {
@@ -510,6 +511,7 @@ void Delete(student stu[])
         cin >> del_id;
 
         bool found = false;
+
         for (int i = 0; i < n; i++)
         {
             if (stu[i].id == del_id)
@@ -539,7 +541,30 @@ void Delete(student stu[])
         getch();
     }
 }
+void thankyou(void)
+{
+    cout << "Thank ";
+    cout.flush();   /*Using it so that no buffer is displayed immediatelt the next word is displayed*/
+    usleep(500000); /*Waiting 500000 mili seconds and then I am displaying next words*/
 
+    cout << "you ";
+    cout.flush();
+    usleep(500000);
+
+    cout << "for ";
+    cout.flush();
+    usleep(500000);
+
+    cout << "using ";
+    cout.flush();
+    usleep(500000);
+
+    cout << "my ";
+    cout.flush();
+    usleep(500000);
+
+    cout << "program" << endl;
+}
 int main()
 {
     while (1)
@@ -611,27 +636,7 @@ int main()
                     break;
 
                 case 'q':
-                    cout << "Thank ";
-                    cout.flush();   /*Using it so that no buffer is displayed immediatelt the next word is displayed*/
-                    usleep(500000); /*Waiting 500000 mili seconds and then I am displaying next words*/
-
-                    cout << "you ";
-                    cout.flush();
-                    usleep(500000);
-
-                    cout << "for ";
-                    cout.flush();
-                    usleep(500000);
-
-                    cout << "using ";
-                    cout.flush();
-                    usleep(500000);
-
-                    cout << "my ";
-                    cout.flush();
-                    usleep(500000);
-
-                    cout << "program" << endl;
+                    thankyou();
                     exit(0);
                     break;
                 default:
