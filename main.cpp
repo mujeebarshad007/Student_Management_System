@@ -4,6 +4,7 @@
 #include <climits>
 #include <cctype>
 #include "conio.h"
+#include <unistd.h>
 using namespace std;
 struct student
 {
@@ -33,19 +34,44 @@ void Add(student stu[])
     char ch;
     do
     {
+
         system("clear");
-        cout
-            << " Enter the id of the student " << n + 1 << endl;
+        cout << " Enter the id of the student " << n + 1 << endl;
         cin >> stu[n].id;
+
+        if (stu[n].id < 0)
+        {
+            cout << " This cannot be a Negative Number Press Enter to go to main menu" << endl;
+            getch();
+            continue;
+        }
         cout << " Enter the Roll number of the student " << n + 1 << endl;
         cin >> stu[n].roll_number;
+        if (stu[n].roll_number < 0)
+        {
+            cout << " This cannot be a Negative Number Press Enter to go to main menu" << endl;
+            getch();
+            continue;
+        }
         cout << " Enter the Name of the student " << n + 1 << endl;
         cin.ignore();
         cin.getline(stu[n].name, 100);
-        cout << " Enter the GPA of the student " << n + 1 << endl;
+        cout << " Enter the GPA of the student  " << n + 1 << endl;
         cin >> stu[n].gpa;
+        if (stu[n].gpa < 0)
+        {
+            cout << " This cannot be a Negative Number Press Enter to go to main menu " << endl;
+            getch();
+            continue;
+        }
         cout << " Enter the Semester of the student " << n + 1 << endl;
         cin >> stu[n].semester;
+        if (stu[n].semester < 0)
+        {
+            cout << " This cannot be a Negative Number Press Enter to go to main menu" << endl;
+            getch();
+            continue;
+        }
         n++;
         cout << " Do you want more students to add [y/n]\n";
         cin >> ch;
@@ -384,33 +410,33 @@ void Modify(student stu[])
                     cout << endl;
                     cout << " Enter the New Modifiying Id " << endl;
                     cin >> stu[i].id;
-                    cout << " ID has been Modified Successfully. \n";
+                    cout << " ID has been Modified Successfully. Press Enter \n";
                     break;
                 case 'r':
                     cout << endl;
                     cout << " Enter the new Modifying Roll number of the student " << endl;
                     cin >> stu[i].roll_number;
-                    cout << " Roll Number has been Modified Successfully. \n";
+                    cout << " Roll Number has been Modified Successfully. Press Enter \n";
                     break;
                 case 'n':
                     cout << endl;
                     cout << " Enter the New Modifiying Name " << endl;
                     cin.ignore();
                     cin.getline(stu[i].name, 100);
-                    cout << " Name has been Modified Successfully. \n";
+                    cout << " Name has been Modified Successfully. Press Enter \n";
                     break;
                 case 'g':
                     cout << endl;
                     cout << " Enter the New Modifiying Gpa " << endl;
                     cin >> stu[i].gpa;
-                    cout << " GPA has been Modified Successfully. \n";
+                    cout << " GPA has been Modified Successfully. Press Enter \n";
                     break;
 
                 case 's':
                     cout << endl;
                     cout << " Enter the new Modifying Semester of the student " << endl;
                     cin >> stu[i].semester;
-                    cout << " Semester has been Modified Successfully. \n";
+                    cout << " Semester has been Modified Successfully. Press Enter \n";
 
                     break;
 
@@ -430,10 +456,10 @@ void Modify(student stu[])
                     cout << " Enter the New Modifiying Gpa " << endl;
                     cin >> stu[i].gpa;
                     cout << endl;
-                    cout << " Enter the new Modifying Semester of the student " << endl;
+                    cout << " Enter the new Modifying Semester of the student  " << endl;
                     cin >> stu[i].semester;
                     cout << endl;
-                    cout << " Record has been Modified Successfully. \n";
+                    cout << " Record has been Modified Successfully. Press Enter \n";
                     break;
                 default:
                     cout << "Invalid Option . No Record is changed \n";
@@ -443,8 +469,8 @@ void Modify(student stu[])
         }
         if (!found)
         {
-            cout << " Three is No record Present for this ID " << endl;
-            cout << " Press Enter to Go to Main Menus " << endl;
+            cout << " There is No record Present for this ID " << endl;
+            cout << " Press Enter to Go to Main Menu " << endl;
         }
     }
     else
@@ -491,7 +517,7 @@ void Delete(student stu[])
                 break;
             }
         }
-        if (!found)
+        if (found)
         {
             cout << "No record found with ID " << del_id << "!\n";
         }
@@ -505,6 +531,18 @@ void Delete(student stu[])
     }
 }
 
+void hello(void)
+{
+    cout << "H ";
+    usleep(500000); // Wait 500ms
+    cout << "e ";
+    usleep(500000);
+    cout << "l ";
+    usleep(500000);
+    cout << "l ";
+    usleep(500000);
+    cout << "o" << endl;
+}
 int main()
 {
     while (1)
@@ -570,6 +608,27 @@ int main()
                     Delete(stu);
                     break;
                 case 'q':
+                    cout << "Thank ";
+                    cout.flush();
+                    usleep(500000);
+
+                    cout << "you ";
+                    cout.flush();
+                    usleep(500000);
+
+                    cout << "for ";
+                    cout.flush();
+                    usleep(500000);
+
+                    cout << "using ";
+                    cout.flush();
+                    usleep(500000);
+
+                    cout << "my ";
+                    cout.flush();
+                    usleep(500000);
+
+                    cout << "program" << endl;
                     exit(0);
                     break;
                 default:
