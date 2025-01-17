@@ -45,34 +45,43 @@ void Add(student stu[])
             getch();
             continue;
         }
+
         cout << " Enter the Roll number of the student " << n + 1 << endl;
         cin >> stu[n].roll_number;
+
         if (stu[n].roll_number < 0)
         {
             cout << " This cannot be a Negative Number Press Enter to go to main menu" << endl;
             getch();
             continue;
         }
+
         cout << " Enter the Name of the student " << n + 1 << endl;
         cin.ignore();
         cin.getline(stu[n].name, 100);
+
         cout << " Enter the GPA of the student  " << n + 1 << endl;
         cin >> stu[n].gpa;
+
         if (stu[n].gpa < 0)
         {
             cout << " This cannot be a Negative Number Press Enter to go to main menu " << endl;
             getch();
             continue;
         }
+
         cout << " Enter the Semester of the student " << n + 1 << endl;
         cin >> stu[n].semester;
+
         if (stu[n].semester < 0)
         {
             cout << " This cannot be a Negative Number Press Enter to go to main menu" << endl;
             getch();
             continue;
         }
+
         n++;
+
         cout << " Do you want more students to add [y/n]\n";
         cin >> ch;
 
@@ -182,7 +191,7 @@ void Sort_by_name(student stu[])
             for (int k = 0; name1[k] != '\0' || name2[k] != '\0'; k++)
             {
                 name1[k] = tolower(name1[k]);
-                name2[k] = tolower(name2[k]);
+                name2[k] = tolower(name2[k]); /*Used this to make all characterss lower*/
             }
 
             if (strcmp(name1, name2) > 0)
@@ -380,7 +389,7 @@ void Modify(student stu[])
 
         for (int i = 0; i < n; i++)
         {
-            if (m_id == stu[i].id)
+            if (m_id == stu[i].id) /*searching for ID*/
             {
 
                 found = true;
@@ -531,18 +540,6 @@ void Delete(student stu[])
     }
 }
 
-void hello(void)
-{
-    cout << "H ";
-    usleep(500000); // Wait 500ms
-    cout << "e ";
-    usleep(500000);
-    cout << "l ";
-    usleep(500000);
-    cout << "l ";
-    usleep(500000);
-    cout << "o" << endl;
-}
 int main()
 {
     while (1)
@@ -609,8 +606,8 @@ int main()
                     break;
                 case 'q':
                     cout << "Thank ";
-                    cout.flush();
-                    usleep(500000);
+                    cout.flush();   /*Using it so that no buffer is displayed immediatelt the next word is displayed*/
+                    usleep(500000); /*Waiting 500000 mili seconds and then I am displaying next words*/
 
                     cout << "you ";
                     cout.flush();
